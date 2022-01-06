@@ -61,6 +61,8 @@ if(typeof _bsa !== 'undefined' && _bsa) {
    </script>
 <script async src='/js/autotrack.js'></script>
 
+
+
 <meta name="robots" content="noindex">
 <body><link rel="stylesheet" href="/assests/css/font-awesome.min.css">
 <!-- New toolbar-->
@@ -210,7 +212,7 @@ RIGHT SIDEBAR TOGGLE SECTION
 <div class="bs-example bs-example-tabs right-sidebar-tab-notification" data-example-id="togglable-tabs">
 
   
-        <!---<div class="responsive-icons">
+        <div class="responsive-icons">
             <a href="#url" class="desktop-mode">
                 <span class="w3l-icon -desktop">
                     <span class="fa fa-desktop"></span>
@@ -226,7 +228,7 @@ RIGHT SIDEBAR TOGGLE SECTION
                     <span class="fa fa-mobile"></span>
                 </span>
             </a>
-        </div>-->
+        </div>
     </div>
     <div class="right-sidebar-panel-content animated fadeInRight" tabindex="5003"
         style="overflow: hidden; outline: none;">
@@ -312,9 +314,7 @@ RIGHT SIDEBAR TOGGLE SECTION
       <div class="modal-body">
         <div class="modal__content">
          <a class="nav_head"> <span> <b>Social</b> </span></a>
-          <ul>
-		    <li><i class="fa fa-linkedin"></i></li>
-		  </ul>
+         
 
          
 
@@ -326,7 +326,8 @@ RIGHT SIDEBAR TOGGLE SECTION
               <li class="mt-2">
                 <p><a href="">parthbhut1602@gmail.com</a></p>
               </li>
-            </ul>
+			  
+		   
           </div>
        
 
@@ -345,8 +346,8 @@ RIGHT SIDEBAR TOGGLE SECTION
         <div class="banner-wrapper text-center">
             <div class="">
                 <span class="text">About Me</span>
-                <h1 class="mb-4 title">Hello, <span class="type-js"><span class="text-js">I’m Parth B Bhut</span></span><br>
-                    I’m working as UI/UX Designer.</h1>
+                <h1 class="mb-4 title">Hello, I’m Parth B Bhut<br>
+                    I’m working as  <span class="txt-rotate" data-period="2000" data-rotate='[" Web Developer.", "Data Analyst.", "Android Developer.", "Software Developer.", "Coding Enthusiast" ]'></span></h1>
                 <p class="mx-lg-5">I love <strong>Graphic design</strong> and <strong>Photography</strong> and have been working on my portfolio since 2019.
                     I Can give your business a new Creative start right away!
                 </p>
@@ -697,6 +698,66 @@ RIGHT SIDEBAR TOGGLE SECTION
       }
     });
   });
+</script>
+
+<script src="typed.js"></script>
+<script>
+  var TxtRotate = function(el, toRotate, period) {
+  this.toRotate = toRotate;
+  this.el = el;
+  this.loopNum = 0;
+  this.period = parseInt(period, 10) || 2000;
+  this.txt = '';
+  this.tick();
+  this.isDeleting = false;
+};
+
+TxtRotate.prototype.tick = function() {
+  var i = this.loopNum % this.toRotate.length;
+  var fullTxt = this.toRotate[i];
+
+  if (this.isDeleting) {
+    this.txt = fullTxt.substring(0, this.txt.length - 1);
+  } else {
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+  }
+
+  this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+  var that = this;
+  var delta = 300 - Math.random() * 100;
+
+  if (this.isDeleting) { delta /= 2; }
+
+  if (!this.isDeleting && this.txt === fullTxt) {
+    delta = this.period;
+    this.isDeleting = true;
+  } else if (this.isDeleting && this.txt === '') {
+    this.isDeleting = false;
+    this.loopNum++;
+    delta = 500;
+  }
+
+  setTimeout(function() {
+    that.tick();
+  }, delta);
+};
+
+window.onload = function() {
+  var elements = document.getElementsByClassName('txt-rotate');
+  for (var i=0; i<elements.length; i++) {
+    var toRotate = elements[i].getAttribute('data-rotate');
+    var period = elements[i].getAttribute('data-period');
+    if (toRotate) {
+      new TxtRotate(elements[i], JSON.parse(toRotate), period);
+    }
+  }
+ 
+  var css = document.createElement("style");
+  css.type = "style-liberty.css";
+  css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #000}";
+  document.body.appendChild(css);
+};
 </script>
 <!-- //MENU-JS -->
 
